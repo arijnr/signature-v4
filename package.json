@@ -1,6 +1,6 @@
 {
   "name": "@arijnr/signature-v4",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "AWS Signature Version 4",
   "main": "signature-v4.bundle.js",
   "jsnext:main": "index.js",
@@ -16,18 +16,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/goldenbearkin/signature-v4.git"
+    "url": "https://github.com/arijnr/signature-v4.git"
   },
   "keywords": [
     "AWS",
     "Signature Version 4"
   ],
-  "author": "goldenbearkin <huihangkin@gmail.com>",
+  "author": "arijnr <aristeujnr@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/goldenbearkin/signature-v4/issues"
+    "url": "https://github.com/arijnr/signature-v4/issues"
   },
-  "homepage": "https://github.com/goldenbearkin/signature-v4#readme",
+  "homepage": "https://github.com/arijnr/signature-v4#readme",
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.39",
