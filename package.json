@@ -1,6 +1,6 @@
 {
   "name": "signature-v4",
-  "version": "0.0.0-semantically-released",
+  "version": "3.0.0",
   "description": "AWS Signature Version 4",
   "main": "signature-v4.bundle.js",
   "jsnext:main": "index.js",
@@ -30,7 +30,6 @@
   "homepage": "https://github.com/goldenbearkin/signature-v4#readme",
   "devDependencies": {
     "@types/chai": "^3.4.35",
-    "@types/crypto-js": "^3.1.33",
     "@types/mocha": "^2.2.39",
     "@types/node": "^7.0.5",
     "chai": "^3.5.0",
@@ -46,9 +45,7 @@
     "tslint": "^4.4.2",
     "typescript": "^2.1.6"
   },
-  "dependencies": {
-    "crypto-js": "^3.1.9-1"
-  },
+  "dependencies": {},
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

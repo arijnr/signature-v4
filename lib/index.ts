@@ -1,6 +1,6 @@
-import { enc, HmacSHA256, SHA256 } from 'crypto-js';
 import { Headers } from './headers';
 import * as Helper from './helper';
+const crypto = require('crypto');
 
 export { Headers };
 
@@ -58,7 +58,7 @@ export class SignatureV4 {
       + this.buildCanonicalQueryString() + '\n'
       + this.buildCanonicalHeaders() + '\n'
       + this.buildSignedHeaders() + '\n'
-      + enc.Hex.stringify(SHA256(this.payload));
+      + crypto.createHash('sha256').update(this.payload).digest('hex');
   }
 
   createStringToSign(): string {
@@ -66,7 +66,7 @@ export class SignatureV4 {
     return 'AWS4-HMAC-SHA256\n'
       + `${this.xAmzDate}\n`
       + `${yyyymmdd}/${encodeURIComponent(this.region)}/${encodeURIComponent(this.service)}/aws4_request\n`
-      + enc.Hex.stringify(SHA256(this.createCanonicalRequest()));
+      + crypto.createHash('sha256').update(this.createCanonicalRequest()).digest('hex');
   }
 
   createSignture(accessKeyId: string, secretAccessKey: string): string {
@@ -93,11 +93,11 @@ export class SignatureV4 {
   private calculateSignature(secretAccessKey: string): string {
     const yyyymmdd = this.xAmzDate.split('T')[0];
     const stringToSign = this.createStringToSign();
-    const kDate = HmacSHA256(yyyymmdd, 'AWS4' + secretAccessKey);
-    const kRegion = HmacSHA256(this.region, kDate);
-    const kService = HmacSHA256(this.service, kRegion);
-    const kSigning = HmacSHA256('aws4_request', kService);
-    return enc.Hex.stringify(HmacSHA256(stringToSign, kSigning));
+    const kDate = crypto.createHmac('sha256', 'AWS4' + secretAccessKey).update(yyyymmdd).digest();
+    const kRegion = crypto.createHmac('sha256', kDate).update(this.region).digest();
+    const kService = crypto.createHmac('sha256', kRegion).update(this.service).digest();
+    const kSigning = crypto.createHmac('sha256', kService).update('aws4_request').digest();
+    return crypto.createHmac('sha256', kSigning).update(stringToSign).digest('hex');
   }
 
   private buildHTTPRequestMethod(): string {
